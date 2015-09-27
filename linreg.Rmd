@@ -1,9 +1,5 @@
 ---
 title: "Linear Regression Course Project"
-output: html_document
----
----
-title: "Linear Regression Course Project"
 output: pdf_document
 ---
 
@@ -39,14 +35,26 @@ orse power has a slightly negative coefficient, -0.032, suggesting that it has n
 `plot(model1)` , shows the residual plots for the model chosen. The Residual vs Fitted [3] shows that the residuals are normally distributed along the fitted values. The Normal Q-Q [4] plot shows that in the center of the distribution, the model has the best fit, and as the residuals become more drasitc, the model fits slightly worse. The Scale-Location plot [5] shows again that the residuals are normally distributed, and the Residual vs Leverage plot [6] confirms that the outliers with large leverages are consistant between the different plots.
 
 ##Conclusion
-
+In summary, with the model including regressors wt, cyl, hp and am, there is a significant difference between the mpg ratings for cars with a manual transmission vs and automatic. This model suggests that holding all other regressors contant, cars with a manual transmission will get 1.81 mpg more than cars with an automatic.
 
 
 ##Appendix
 
-[1] `{r, echo=FALSE} `
-[2] `{r, echo=FALSE} `
-[3] `{r, echo=FALSE} `
-[4] `{r, echo=FALSE} `
-[5] `{r, echo=FALSE} `
-[6] `{r, echo=FALSE} `
+###Plots
+[1] ```{r, echo=FALSE} boxplot(mpg~am, mtcars)```  
+[2] ```{r, echo=FALSE} boxplot(wt~am, mtcars)``  
+[3] ```{r, echo=FALSE} plot(model1, which=1)```  
+[4] ```{r, echo=FALSE} plot(model1, which=2)```  
+[5] ```{r, echo=FALSE} plot(model1, which=3)```  
+[6] ```{r, echo=FALSE} plot(model1, which=4)```  
+
+###Statistical Inference
+```{r, echo=TRUE}t.test(mtcars[mtcars$am=="0",]$mpg, mtcars[mtcars$am=="1",]$mpg)```  
+```{r, echo=TRUE}t.test(mtcars[mtcars$am=="0",]$wt, mtcars[mtcars$am=="1",]$wt)```  
+
+###Linear Regression
+```{r, echo=TRUE}summary(fit)$coefficients```  
+```{r, echo=TRUE}vif(fit)```  
+```{r, echo=TRUE}summary(model1)$coefficients```  
+```{r, echo=TRUE}summary(model2)$coefficients```  
+```{r, echo=TRUE}anova(model1, model2)```  
